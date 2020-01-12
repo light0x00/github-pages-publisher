@@ -1,6 +1,6 @@
 {
 	"name": "github-pages-publisher",
-	"version": "0.0.1",
+	"version": "0.0.4",
 	"main": "src/index.js",
 	"bin": {
 		"gp": "src/index.js"
