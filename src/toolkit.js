@@ -15,7 +15,8 @@ function getOpts() {
 			worktreePath: "w",
 			//部署目标分支
 			pagesBranch: "p",
-			yes: false,
+			commitMessage: "m",
+			yes: "y",
 			cleanHistory: false
 		},
 		default: {

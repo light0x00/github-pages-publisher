@@ -4,7 +4,7 @@ const Path = require("path")
 const { assert, exec, getOpts, Colors } = require("./toolkit");
 const CWD = process.cwd()
 
-function main({ help, branch, assetsPath, worktreePath, pagesBranch, yes, cleanHistory }) {
+function main({ help, branch, assetsPath, worktreePath, pagesBranch, yes, cleanHistory ,commitMessage}) {
 
 	if (help) {
 		process.stdout.write(
@@ -13,9 +13,13 @@ function main({ help, branch, assetsPath, worktreePath, pagesBranch, yes, cleanH
 -b,--branch	The branch where the "assetsPath" is located.(default is current branch)
 -w,--worktreePath The Path to store the gh-pages worktree.(default is ".gh-pages" relative to "pwd")
 -p,--pagesBranch The branch to deploy gh-pages.(default is "gh-pages")
+-m,--commitMessage The commit message when publish.
+-y,--yes Don't ask at each release.
 `)
 		process.exit(0);
 	}
+	if(commitMessage==undefined)
+	commitMessage="release: auto"
 	assert(assetsPath != undefined, "The option `-a,--assetsPath` is required!")
 	if (Path.isAbsolute(assetsPath))
 		assetsPath = Path.resolve(CWD, assetsPath);
@@ -37,7 +41,7 @@ function main({ help, branch, assetsPath, worktreePath, pagesBranch, yes, cleanH
 3. Publish the assets located "${assetsPath}" to gh-pages(${pagesBranch}) branch.` +
 		(cleanHistory ? "\n\033[31m" + `4. Clean the commit history of gh-pages branch(${pagesBranch}),It's irrevocable!` + "\033[0m" : "")
 	if (yes) {
-		Workflow.exec({ worktree: worktreePath, pagesBranch, masterBranch: branch, assetsPath })
+		Workflow.exec({ worktree: worktreePath, pagesBranch, masterBranch: branch, assetsPath,commitMessage })
 	} else {
 		var inquirer = require('inquirer');
 		inquirer
@@ -52,7 +56,7 @@ function main({ help, branch, assetsPath, worktreePath, pagesBranch, yes, cleanH
 				if (answers.continue != "y") {
 					process.exit(0);
 				}
-				Workflow.exec({ worktree: worktreePath, pagesBranch, masterBranch: branch, assetsPath })
+				Workflow.exec({ worktree: worktreePath, pagesBranch, masterBranch: branch, assetsPath,commitMessage})
 			}).catch(
 				e => {
 					console.log("An unexpected exception occurs,exit(1).", e)
@@ -79,7 +83,7 @@ const Workflow = {
 		Git.reset({ hard: true })
 		Git.commit({ msg: "initial commit", allowEmpty: true })
 	},
-	exec({ worktree, pagesBranch, masterBranch, assetsPath }) {
+	exec({ worktree, pagesBranch, masterBranch, assetsPath,commitMessage }) {
 		// 当前分支不允许有未提交文件
 		this.ensureCommitted()
 
@@ -96,7 +100,7 @@ const Workflow = {
 		shell.cp("-r", assetsPath, worktree)
 		shell.cd(worktree)
 		Git.add({ path: "." })
-		Git.commit({ msg: "deploy" })
+		Git.commit({ msg: commitMessage })
 		let remotes = Git.remote.list();
 		assert(remotes.length > 0, Colors.red("Remote repo was not found,plz run `git remote add ..` first."))
 		Git.push({ remote: remotes[0], branch: pagesBranch, setUpstream: true, force: true })
