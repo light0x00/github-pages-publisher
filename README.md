@@ -32,4 +32,6 @@ Sometimes you want to customize some behavior, such as specifying the path to th
 -b,--branch	The branch where the "assetsPath" is located.(default is current branch)
 -w,--worktreePath The Path to store the gh-pages worktree.(default is ".gh-pages" relative to "pwd")
 -p,--pagesBranch The branch to deploy gh-pages.(default is "gh-pages")
+-m,--commitMessage The commit message when publish.
+-y,--yes Don't ask at each release.
 ```
