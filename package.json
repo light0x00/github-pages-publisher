@@ -1,0 +1,38 @@
+{
+	"name": "github-pages-publisher",
+	"version": "0.0.1",
+	"main": "src/index.js",
+	"bin": {
+		"gp": "src/index.js"
+	},
+	"scripts": {
+		"test": "yarn mocha test/*.js"
+	},
+	"dependencies": {
+		"getopts": "^2.2.5",
+		"inquirer": "^7.0.3",
+		"shelljs": "^0.8.3"
+	},
+	"devDependencies": {
+		"mocha": "^7.0.0",
+		"nyc": "^15.0.0"
+	},
+	"keywords": [
+		"git",
+		"gh-pages",
+		"github"
+	],
+	"contributors": [
+		"Chen Yang <light0x00@163.com> (https://github.com/light0x00)"
+	],
+	"description": "A simple and transparent way to publish your web-resources to Github Pages",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/light0x00/github-pages-publisher.git"
+	},
+	"homepage": "https://github.com/light0x00/github-pages-publisher",
+	"publishConfig": {
+		"access": "public"
+	}
+}
