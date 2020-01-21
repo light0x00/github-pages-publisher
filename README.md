@@ -1,4 +1,5 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![a](https://img.shields.io/npm/v/github-pages-publisher)](https://www.npmjs.com/package/github-pages-publisher)
 
 ## What?
 
