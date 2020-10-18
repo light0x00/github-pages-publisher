@@ -7,8 +7,8 @@ A simple and transparent way to publish your web-resources to Github Pages.
 
 ## User Story
 
-- It's very inefficient to run many git commands per release,wish the process to be simple.
-- Every release makes the git repository huge, wish to publish an unhistorical gh-pages branch.
+- It's very inefficient to run many git commands per release,wishing the process to be simple.
+- Every release makes the git repository huge, wishing to publish an unhistorical gh-pages branch.
 
 ## How to use?
 
@@ -16,13 +16,13 @@ A simple and transparent way to publish your web-resources to Github Pages.
 npm i -D github-pages-publisher
 ```
 
-In the simplest scenario, we want to publish our web resources to the `gh-pages` branch,  just need specifying the path to the web resource using `-a` or `--assetsPath`. eg:
+In the simplest scenario, we want to publish our web resources to the `gh-pages` branch. We can specify the path to the web resource using `-a` or `--assetsPath`. eg:
 
 ```
 npx gp -a 'packages/web/dist'
 ```
 
-you will see a worktree directory called `.gh-pages` created,Now that the release is complete and you can try visiting your page.
+You will see a worktree directory called `.gh-pages` created.Now the release is complete and you can try visiting your page.
 
 
 Sometimes you want to customize some behavior, such as specifying the path to the working tree,or the name of the gh-pages branch. You can specify this through the following Settings:
